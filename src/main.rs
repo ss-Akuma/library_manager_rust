@@ -58,8 +58,36 @@ fn log_in(user_info: &HashMap<String,String>) -> bool{
         } 
     }
 }
-    
 
+fn search_book(){
+
+}
+
+fn edit_book(){
+
+}
+
+fn borrow_book(){
+
+}
+
+fn add_book(){
+
+}
+
+fn delete_book(){
+
+}
+
+fn edit_user(){
+
+}
+
+fn logout(){
+
+}
+
+//fn 
 fn main() {
     let mut  user_info: HashMap<String, String> = HashMap::new();
     let mut _is_logged_in = false;
@@ -91,6 +119,43 @@ fn main() {
          
         
     }
-    println!("Welcome to the system!");
+    println!("### Welcome to the system! ###");
+    println!("### please choose your operation ###
+\nsearch_book\nedit_book\nborrow_book\nadd_book\ndelete_book\n
+edit_user\nlogout\nexit :");
+        let mut operation = String::new();
+        io::stdin().read_line(&mut operation).expect("error");
+        io::stdout().flush().unwrap();
+        let opr = operation.trim().to_lowercase();
+
+        match opr.as_str() {
+            "search_book" => {
+                search_book()
+            }
+            "edit_book" => {
+                edit_book()
+            }
+            "borrow_book" => {
+                borrow_book()
+            }
+            "add_book" => {
+                add_book()
+            }
+            "delete_book" => {
+                delete_book()
+            }
+            "edit_user" => {
+                edit_user()
+            }
+            "logout" => {
+                logout()
+            }
+            "exit" => {
+                println!("Exiting...");
+                std::process::exit(0);
+            }
+            _ => println!("invalid operation!")
+
+        }
        
 }
