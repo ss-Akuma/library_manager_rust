@@ -1,6 +1,48 @@
 use std::io::{self, Write};
 use std::collections::HashMap;
 
+
+
+fn operations(){
+    println!("### please choose your operation ###
+    \nsearch_book\nedit_book\nborrow_book\nadd_book\ndelete_book\n
+edit_user\nlogout\nexit :");
+            let mut operation = String::new();
+            io::stdin().read_line(&mut operation).expect("error");
+            io::stdout().flush().unwrap();
+            let opr = operation.trim().to_lowercase();
+    
+            match opr.as_str() {
+                "search_book" => {
+                    search_book()
+                }
+                "edit_book" => {
+                    edit_book()
+                }
+                "borrow_book" => {
+                    borrow_book()
+                }
+                "add_book" => {
+                    add_book()
+                }
+                "delete_book" => {
+                    delete_book()
+                }
+                "edit_user" => {
+                    edit_user()
+                }
+                "logout" => {
+                    logout()
+                }
+                "exit" => {
+                    println!("Exiting...");
+                    std::process::exit(0);
+                }
+                _ => println!("invalid operation!")
+    
+            }
+}
+
 fn sign_up(user_info: &mut HashMap<String,String>){
     println!("you've entered signup");
 
@@ -28,35 +70,26 @@ fn sign_up(user_info: &mut HashMap<String,String>){
 }
 
 fn log_in(user_info: &HashMap<String,String>) -> bool{
-    println!("you've entered login");
-    println!("please enter your username: ");
+    println!("### You've entered login ###");
 
+    println!("please enter your username: ");
     let mut user_name = String::new();
     io::stdin().read_line(&mut user_name).expect("error");
     let user_name = user_name.trim();
-    
-    match user_info.get(user_name){
-        Some(password) => {
-            loop {
-                println!("please enter your password: ");
-                let mut input_password = String::new(); 
-                io::stdin().read_line(&mut input_password).expect("error");
-                let input_password = input_password.trim();
+       
+    println!("please enter your password: ");
+    let mut input_password = String::new(); 
+    io::stdin().read_line(&mut input_password).expect("error");
+    let input_password = input_password.trim();
 
-                if password == input_password{
-                    println!("you've logged in");
-                    return true
-                    
-                }else{
-                    println!("password incorrect!")
-                }
-            }
-        },
-        None => {
-            println!("username not found!");
-            false
-        } 
+    if () {
+        println!("you've logged in");
+        return true
+        
+    }else{
+        println!("password incorrect!")
     }
+            
 }
 
 fn search_book(){
@@ -114,48 +147,9 @@ fn main() {
             }
             _ => println!("invalid operation!")
 
-        }
-            
-         
-        
+        }    
     }
     println!("### Welcome to the system! ###");
-    println!("### please choose your operation ###
-\nsearch_book\nedit_book\nborrow_book\nadd_book\ndelete_book\n
-edit_user\nlogout\nexit :");
-        let mut operation = String::new();
-        io::stdin().read_line(&mut operation).expect("error");
-        io::stdout().flush().unwrap();
-        let opr = operation.trim().to_lowercase();
-
-        match opr.as_str() {
-            "search_book" => {
-                search_book()
-            }
-            "edit_book" => {
-                edit_book()
-            }
-            "borrow_book" => {
-                borrow_book()
-            }
-            "add_book" => {
-                add_book()
-            }
-            "delete_book" => {
-                delete_book()
-            }
-            "edit_user" => {
-                edit_user()
-            }
-            "logout" => {
-                logout()
-            }
-            "exit" => {
-                println!("Exiting...");
-                std::process::exit(0);
-            }
-            _ => println!("invalid operation!")
-
-        }
-       
+    operations();
+    
 }
