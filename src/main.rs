@@ -1,7 +1,6 @@
 use std::io::{self, Write};
 use std::collections::HashMap;
-
-
+use library_manager_rust::users::User;
 
 fn operations(){
     println!("### please choose your operation ###
@@ -43,54 +42,6 @@ edit_user\nlogout\nexit :");
             }
 }
 
-fn sign_up(user_info: &mut HashMap<String,String>){
-    println!("you've entered signup");
-
-    loop{
-        println!("please enter your username: ");
-
-        let mut user_name = String::new();
-        io::stdin().read_line(&mut user_name).expect("error");
-        let user_name = user_name.trim().to_string();
-
-        if user_info.contains_key(&user_name) {
-            println!("username exists!");
-        }else {
-            println!("please enter your password: ");
-
-            let mut input_password = String::new(); 
-            io::stdin().read_line(&mut input_password).expect("error");
-            let input_password = input_password.trim().to_string();
-
-            user_info.insert(user_name, input_password);
-            println!("you've signed up succesfully!");
-            return;
-        }
-    }
-}
-
-fn log_in(user_info: &HashMap<String,String>) -> bool{
-    println!("### You've entered login ###");
-
-    println!("please enter your username: ");
-    let mut user_name = String::new();
-    io::stdin().read_line(&mut user_name).expect("error");
-    let user_name = user_name.trim();
-       
-    println!("please enter your password: ");
-    let mut input_password = String::new(); 
-    io::stdin().read_line(&mut input_password).expect("error");
-    let input_password = input_password.trim();
-
-    if () {
-        println!("you've logged in");
-        return true
-        
-    }else{
-        println!("password incorrect!")
-    }
-            
-}
 
 fn search_book(){
 
@@ -122,9 +73,8 @@ fn logout(){
 
 //fn 
 fn main() {
-    let mut  user_info: HashMap<String, String> = HashMap::new();
+    let mut  user_db: HashMap<String, User> = HashMap::new();
     let mut _is_logged_in = false;
-    user_info.insert("ali".to_string(), "password123".to_string());
 
     while !_is_logged_in{
         println!("please choose your operation (login/signup/exit): ");
@@ -135,11 +85,72 @@ fn main() {
 
         match opr.as_str() {
             "login" => {
-                _is_logged_in = log_in(&user_info);
+
+                println!("### login ###");
+
+                println!("please enter your username: ");
+                let mut user_name = String::new();
+                io::stdin().read_line(&mut user_name).expect("error");
+                let user_name = user_name.trim().to_string();
+        
+                println!("please enter your password: ");
+                let mut input_password = String::new(); 
+                io::stdin().read_line(&mut input_password).expect("error");
+                let input_password = input_password.trim().to_string();
+
+                let login_succes = User::login(user_name, input_password, &mut user_db);
+                
+                if login_succes{
+                    _is_logged_in = true;
+                }
+                else {
+                    println!("username or password not valid!");
+                }
             }
             "signup" => {
-                sign_up(&mut user_info);
-                _is_logged_in = log_in(&user_info);
+
+                println!("### signup ###");
+
+                loop{
+                    println!("please enter your username: ");
+                    let mut user_name = String::new();
+                    io::stdin().read_line(&mut user_name).expect("error");
+                    let user_name = user_name.trim().to_string();
+            
+                    println!("please enter your password: ");
+                    let mut input_password = String::new(); 
+                    io::stdin().read_line(&mut input_password).expect("error");
+                    let input_password = input_password.trim().to_string();
+            
+                    let signup_succes = User::signup(user_name,input_password,&mut user_db);
+                    if signup_succes {
+                        println!("signup succesful!");
+                        break;
+                    }
+                    else {
+                        println!("Signup failed: User already exists.")
+                    }
+                }
+                println!("### login ###");
+
+                println!("please enter your username: ");
+                let mut user_name = String::new();
+                io::stdin().read_line(&mut user_name).expect("error");
+                let user_name = user_name.trim().to_string();
+        
+                println!("please enter your password: ");
+                let mut input_password = String::new(); 
+                io::stdin().read_line(&mut input_password).expect("error");
+                let input_password = input_password.trim().to_string();
+
+                let login_succes = User::login(user_name, input_password, &mut user_db);
+                
+                if login_succes{
+                    _is_logged_in = true;
+                }
+                else {
+                    println!("username or password not valid!");
+                }
             }
             "exit" => {
                 println!("Exiting...");
