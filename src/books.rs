@@ -7,7 +7,7 @@ pub struct Book{
 }
 
 impl Book {
-    pub fn new(&self,name:String,year:u32,author:String) -> Self{
+    pub fn new(name:String,year:u32,author:String) -> Self{
         Self{
             name:name,
             year:year,
@@ -38,8 +38,7 @@ impl Book {
     }
     // pub fn set_id(&self){
 
-    // }
-    
+    // }    
 
 
 }

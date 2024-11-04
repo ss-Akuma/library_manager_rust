@@ -6,40 +6,40 @@ fn operations(){
     println!("### please choose your operation ###
     \nsearch_book\nedit_book\nborrow_book\nadd_book\ndelete_book\n
 edit_user\nlogout\nexit :");
-            let mut operation = String::new();
-            io::stdin().read_line(&mut operation).expect("error");
-            io::stdout().flush().unwrap();
-            let opr = operation.trim().to_lowercase();
-    
-            match opr.as_str() {
-                "search_book" => {
-                    search_book()
-                }
-                "edit_book" => {
-                    edit_book()
-                }
-                "borrow_book" => {
-                    borrow_book()
-                }
-                "add_book" => {
-                    add_book()
-                }
-                "delete_book" => {
-                    delete_book()
-                }
-                "edit_user" => {
-                    edit_user()
-                }
-                "logout" => {
-                    logout()
-                }
-                "exit" => {
-                    println!("Exiting...");
-                    std::process::exit(0);
-                }
-                _ => println!("invalid operation!")
-    
-            }
+    let mut operation = String::new();
+    io::stdin().read_line(&mut operation).expect("error");
+    io::stdout().flush().unwrap();
+    let opr = operation.trim().to_lowercase();
+
+    match opr.as_str() {
+        "search_book" => {
+            search_book()
+        }
+        "edit_book" => {
+            edit_book()
+        }
+        "borrow_book" => {
+            borrow_book()
+        }
+        "add_book" => {
+            add_book()
+        }
+        "delete_book" => {
+            delete_book()
+        }
+        "edit_user" => {
+            edit_user()
+        }
+        "logout" => {
+            logout()
+        }
+        "exit" => {
+            println!("Exiting...");
+            std::process::exit(0);
+        }
+        _ => println!("invalid operation!")
+
+    }
 }
 
 
